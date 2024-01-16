@@ -1,0 +1,52 @@
+  const int switchPin = 8;
+
+//hold the time LED is changed 
+  unsigned long previousTime = 0;
+
+  int switchState = 0;
+  int prevSwitchState = 0;
+  int led = 2;
+
+//long is a datatype that controls the delay time between the LEDs turn on (high)
+//the numbers are in milliseconds (10 mins = 600,000 milliseconds)
+  long interval = 1000;
+
+void setup() {
+  // put your setup code here, to run once:
+//declate pins 1-7 as output pins using a loop
+  for(int x = 2;x<8;x++){
+    pinMode(x, OUTPUT);
+  }
+  pinMode(switchPin, INPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+//get the amount of time LEDs are running
+  unsigned long currentTime = millis();
+
+//check to see if enough time has passed
+  if(currentTime - previousTime > interval) {
+    previousTime = currentTime;
+
+  //if the time has passed check if the LEDs are all on 
+    digitalWrite(led, HIGH);
+    led++;
+  if(led == 7){
+  } 
+    }
+
+  //if the LEDs are all on check reset their state to low (off)
+  switchState = digitalRead(switchPin);
+
+  if(switchState != prevSwitchState){
+    for(int x = 2;x<8;x++){
+      digitalWrite(x, LOW);
+    }
+  led = 2;
+    previousTime = currentTime;
+  }
+  prevSwitchState = switchState;
+}
+
+
