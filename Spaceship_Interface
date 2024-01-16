@@ -1,0 +1,39 @@
+int switchState = 0;
+
+void setup() {
+  //assign the pins as inputs/outputs
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(2, INPUT);
+}
+
+void loop() {
+//check the voltage level on the digital input
+  switchState = digitalRead(2);
+
+if (switchState == LOW){
+  //button is not pressed
+
+  //digitalWrite allows you to send the voltage to the output pins
+  digitalWrite(3, HIGH); //green LED
+  digitalWrite(4, LOW); //red LED
+  digitalWrite(5, LOW); //red LED
+} else {
+  //button is pressed
+
+  //digitalWrite allows you to send the voltage to the output pins
+  digitalWrite(3, LOW); //green LED
+  digitalWrite(4, LOW); //red LED
+  digitalWrite(5, HIGH); //red LED
+
+  delay(500); 
+  //wait for a quarter of a second to toggle the LEDs
+  digitalWrite(4, HIGH);
+  digitalWrite(5, LOW);
+  delay(500);
+}
+}
+
+//if the switchState is LOW: turn the green LED on and turn the red LEDs off
+//if the switchState is HIGH: turn the green LED off and turn the red LEDs on
